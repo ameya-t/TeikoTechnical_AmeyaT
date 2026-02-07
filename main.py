@@ -2,10 +2,22 @@ import queries as qr
 import streamlit as st
 
 def create_dashboard():
+    """
+        create_dashboard() creates the interactive dashboard to display all data
+        Args: None
+        Returns: Nothing
+    """
+
+
     st.set_page_config(layout="wide")
     st.title("Loblaw Bio: Immune Cell Clinical Trial")
 
     def create_spacing(n):
+        """
+            create_spacing(n) creates vertical spacing of n
+            Args: n, the number of new lines needed
+            Returns: Nothing
+        """
         for _ in range(n):
             st.write('')
 
@@ -23,8 +35,6 @@ def create_dashboard():
     st.divider()
 
     #Display Miraclib Treatment Response Summary
-
-
     st.header('Miraclib Treatment Response Summary')
     create_spacing(1)
     col1, col2 = st.columns([2, 2])
@@ -52,7 +62,6 @@ def create_dashboard():
     st.divider()
 
     #Display Subset Analysis
-
     full_subset, samples_per_proj, responder_cnt, subject_gender = qr.subset_analytics()
 
     st.header('Subset Analysis')

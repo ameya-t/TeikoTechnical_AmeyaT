@@ -9,7 +9,14 @@ from scipy.stats import shapiro, mannwhitneyu
 DB_NAME = 'cell_data.db'
 CELL_DATA_FILE = 'cell-count.csv'
 
+
 def create_db():
+    """
+        create_db() creates the relevant tables in the database
+        Args: None
+        Returns: Nothing
+    """
+
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
 
@@ -50,6 +57,11 @@ def create_db():
     conn.close()
 
 def load_data():
+    """
+        load_data() reads the cell-count.csv file and loads the data into the tables
+        Args: None
+        Returns: Nothing
+    """
 
     data = pd.read_csv(CELL_DATA_FILE)
 
@@ -104,6 +116,12 @@ def load_data():
     print('Database created and data loaded!')
 
 def clear_db():
+    """
+        clear_db() drops all tables from database
+        Args: None
+        Returns: Nothing
+    """
+
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
 
@@ -118,6 +136,12 @@ def clear_db():
 
 
 def create_freq_summary():
+    """
+        create_freq_summary() creates the summary table for initial data overview analysis
+        Args: None
+        Returns: Nothing
+    """
+
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
 
@@ -133,6 +157,12 @@ def create_freq_summary():
     conn.close()
 
 def display_freq_summary():
+    """
+        display_freq_summary() queries the entire frequency_summary table
+        Args: None
+        Returns: dataframe
+    """
+
     conn = sqlite3.connect(DB_NAME)
 
     summary = '''SELECT * FROM frequency_summary;'''
@@ -144,6 +174,12 @@ def display_freq_summary():
     return res
 
 def treatment_response():
+    """
+        treatment_response() averages the relative frequency of cell types for needed requirements
+        Args: None
+        Returns: dataframe
+    """
+
     conn = sqlite3.connect(DB_NAME)
 
     compare = '''
@@ -161,6 +197,13 @@ def treatment_response():
     return res
 
 def treatment_box_plot():
+    """
+        treatment_box_plot() creates the box plot of the frequencies by response
+        Args: None
+        Returns: figure
+    """
+
+
     conn = sqlite3.connect(DB_NAME)
 
     compare = '''
@@ -183,6 +226,12 @@ def treatment_box_plot():
     return fig
 
 def treatment_report():
+    """
+        treatment_report() performs the Mann-Whitney U-test to see significant changes in the data
+        Args: None
+        Returns: dataframe
+    """
+
     conn = sqlite3.connect(DB_NAME)
 
     compare = '''
@@ -219,6 +268,12 @@ def treatment_report():
     return mw_test_df
 
 def subset_analytics():
+    """
+        subset_analytics() queries the database to complete the subset analysis as required
+        Args: None
+        Returns: dataframes
+    """
+
     conn = sqlite3.connect(DB_NAME)
 
     subset = '''WITH subset AS (
