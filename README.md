@@ -1,4 +1,4 @@
-LINK TO DASHBOARD: https://ameya-t-teikotechnical-ameyat-main-ki65od.streamlit.app/
+LINK TO DASHBOARD (Please allow some time for loading): https://ameya-t-teikotechnical-ameyat-main-ki65od.streamlit.app/
 
 
 INSTRUCTIONS FOR RUNNING IN GITHUB CODESPACES:
@@ -25,6 +25,8 @@ print(full_subset)
 print(samples_per_proj)
 print(responder_cnt)
 print(subject_gender)
+
+print(assessment_question()) #this is for the question in the google form
 
 Then, Python queries.py in the terminal. 
 
