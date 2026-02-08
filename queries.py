@@ -291,7 +291,32 @@ def subset_analytics():
 
     return full_subset, samples_per_proj, responder_cnt, subject_gender
 
+def assessment_question():
+    """
+        assessment_question() queries the database to find the average b_cell count
+        in male subjects with Melanoma that have response = 'yes' at time = 0
+        Args: None
+        Returns: dataframe
+    """
 
+    conn = sqlite3.connect(DB_NAME)
+    question = '''
+        SELECT ROUND(AVG(c.count),2) AS b_cells_avg
+        FROM cell_subjects sub JOIN cell_samples sam ON sub.subject_id = sam.subject_id
+        JOIN cell_counts c ON c.sample = sam.sample
+        WHERE sub.condition = 'melanoma'
+        AND sub.sex = 'M'
+        AND sub.response = 'yes'
+        AND sam.time_from_treatment_start = 0
+        AND c.cell_type = 'b_cell';
+    '''
+
+    res = pd.read_sql_query(question, conn)
+    conn.close()
+
+    return res
+
+#print(assessment_question())
 
 
 
